@@ -1,6 +1,7 @@
 package com.dam2_23_24.ejemplocorrutinas.home.ui
 
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
@@ -15,34 +16,29 @@ import kotlinx.coroutines.withContext
 
 class HomeViewModel : ViewModel() {
 
-    private val _resultState = MutableLiveData<String>()
-    val resultState: LiveData<String> = _resultState
+    var resultState by mutableStateOf("")
 
-    private val _callCount = MutableLiveData<Int>()
+    private var callCount by mutableIntStateOf(0)
 
-    private val _color = MutableLiveData<Boolean>()
-
-    init {
-        _callCount.value = 0
-        _color.value = false
-    }
+    private var color by mutableStateOf(false)
 
     fun changeColor() {
-        _color.value = _color.value?.let { !it }
+        color = !color
     }
 
+    fun getColor() = if (color) Color.Blue else Color.Red
+
     fun fetchData() {
-        _callCount.value = _callCount.value?.plus(1)
+        callCount = callCount.plus(1)
         //Nos permite crear una corrutina desde un ViewModel
         viewModelScope.launch {
             val result = withContext(Dispatchers.IO) {
                 delay(5000)
-                "Respuesta de la API (${_callCount.value})"
+                "Respuesta de la API ($callCount)"
             }
-            _resultState.value = result
+            resultState = result
         }
     }
 
-    fun getColor(): Color = if (_color.value == true) Color.Blue else Color.Red
 
 }

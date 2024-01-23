@@ -13,14 +13,12 @@ import androidx.compose.ui.Alignment
 @Composable
 fun Content(homeViewModel: HomeViewModel) {
 
-    val resultState: String by homeViewModel.resultState.observeAsState("")
-
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         BotonColor(homeViewModel)
-        Text(text = resultState)
+        Text(text = homeViewModel.resultState)
         Button(onClick = {
             homeViewModel.fetchData()
         }) {
