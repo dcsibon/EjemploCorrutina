@@ -1,9 +1,7 @@
 package com.dam2_23_24.ejemplocorrutinas.home.ui
 
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.LiveData
@@ -13,7 +11,8 @@ import androidx.lifecycle.ViewModel
 class HomeViewModel : ViewModel() {
 
     var resultState by mutableStateOf("")
-    private var callCount by mutableIntStateOf(0)
+
+    private var callCount by mutableStateOf(0)
 
     private var color by mutableStateOf(false)
 
