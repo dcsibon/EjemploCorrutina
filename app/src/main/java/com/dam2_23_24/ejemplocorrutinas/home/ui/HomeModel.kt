@@ -42,6 +42,7 @@ class HomeViewModel : ViewModel() {
         resultState = result
     }
 
+
     /*
     fun fetchData() {
         //Nos permite crear una corrutina desde un ViewModel
