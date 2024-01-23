@@ -15,24 +15,6 @@ class HomeViewModel : ViewModel() {
     var resultState by mutableStateOf("")
         private set
 
-    var isLoading by mutableStateOf(false)
-        private set
-
-
-    fun fetchData() {
-        //Nos permite crear una corrutina desde un ViewModel
-        viewModelScope.launch {
-            try {
-                isLoading = true
-                llamarApi()
-            } catch (e: Exception) {
-                println("Error ${e.message}")
-            } finally {
-                isLoading = false
-            }
-        }
-    }
-
     //Solo funcionan dentro de una corrutina u otra función suspendida
     private suspend fun llamarApi() {
         val result = withContext(Dispatchers.IO) {
