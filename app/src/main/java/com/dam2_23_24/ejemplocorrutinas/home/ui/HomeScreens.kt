@@ -4,23 +4,18 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.graphics.Color
 
 @Composable
 fun Content(homeViewModel: HomeViewModel) {
+
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        BotonColor()
+        BotonColor(homeViewModel)
         Text(text = homeViewModel.resultState)
         Button(onClick = {
             homeViewModel.bloqueoApp()
@@ -31,15 +26,24 @@ fun Content(homeViewModel: HomeViewModel) {
 }
 
 @Composable
-fun BotonColor() {
-
-    var color by remember { mutableStateOf(false) }
+fun BotonColor(homeViewModel: HomeViewModel) {
 
     Button(
-        onClick = { color = !color },
-        colors = ButtonDefaults.buttonColors(containerColor = if (color) Color.Blue else Color.Red),
+        onClick = { homeViewModel.changeColor() },
+        colors = ButtonDefaults.buttonColors(containerColor = homeViewModel.getColor())
     ) {
         Text(text = "Cambiar color")
     }
+
+    /* Con LiveData
+    val color: Boolean by homeViewModel.color.observeAsState(false)
+
+    Button(
+        onClick = { homeViewModel.changeColor() },
+        colors = ButtonDefaults.buttonColors(containerColor = if (color) Color.Blue else Color.Red)
+    ) {
+        Text(text = "Cambiar color")
+    }
+    */
 
 }
