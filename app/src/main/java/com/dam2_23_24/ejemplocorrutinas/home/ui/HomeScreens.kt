@@ -20,7 +20,7 @@ fun Content(homeViewModel: HomeViewModel) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        BotonColor()
+        BotonColor(homeViewModel)
         if (homeViewModel.isLoading) {
             CircularProgressIndicator()
         } else {
@@ -36,13 +36,11 @@ fun Content(homeViewModel: HomeViewModel) {
 }
 
 @Composable
-fun BotonColor() {
-
-    var color by remember { mutableStateOf(false) }
+fun BotonColor(homeViewModel: HomeViewModel) {
 
     Button(
-        onClick = { color = !color },
-        colors = ButtonDefaults.buttonColors(containerColor = if (color) Color.Blue else Color.Red),
+        onClick = { homeViewModel.changeColor() },
+        colors = ButtonDefaults.buttonColors(containerColor = homeViewModel.getColor()),
     ) {
         Text(text = "Cambiar color")
     }
