@@ -21,14 +21,9 @@ fun Content(homeViewModel: HomeViewModel) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         BotonColor()
-        if (homeViewModel.isLoading) {
-            CircularProgressIndicator()
-        } else {
-            Text(text = homeViewModel.resultState)
-        }
+        Text(text = homeViewModel.resultState)
         Button(onClick = {
-            //mainViewModel.bloqueoApp()
-            homeViewModel.fetchData()
+            homeViewModel.bloqueoApp()
         }) {
             Text("Llamar API")
         }
