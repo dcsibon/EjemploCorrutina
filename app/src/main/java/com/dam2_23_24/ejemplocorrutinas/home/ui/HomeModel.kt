@@ -18,7 +18,6 @@ class HomeViewModel : ViewModel() {
     var isLoading by mutableStateOf(false)
         private set
 
-
     fun fetchData() {
         //Nos permite crear una corrutina desde un ViewModel
         viewModelScope.launch {
@@ -41,23 +40,4 @@ class HomeViewModel : ViewModel() {
         }
         resultState = result
     }
-
-
-    /*
-    fun fetchData() {
-        //Nos permite crear una corrutina desde un ViewModel
-        viewModelScope.launch {
-            val result = withContext(Dispatchers.IO) {
-                delay(5000)
-                "Respuesta de la API"
-            }
-            resultState = result
-        }
-    }
-
-    fun bloqueoApp() {
-        Thread.sleep(5000)
-        resultState = "Respuesta de la API"
-    }
-    */
 }
